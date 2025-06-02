@@ -1,11 +1,19 @@
 import { useRecipeById } from "@/hooks/use-recipe-by-id/use-recipe-by-id";
 import { IRecipe } from "@/services/recipe/entities/recipe.entity";
 import { useParams } from "react-router";
+import Subtitle from "../input/typography/subtitle";
 
 function RecipeDetailPage() {
   const { id } = useParams();
 
   const { recipe, isLoading, error } = useRecipeById(id);
+
+  const getYouTubeVideoId = (url: string) => {
+    const regExp =
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return match && match[2].length === 11 ? match[2] : null;
+  };
 
   if (isLoading) {
     return (
@@ -42,53 +50,59 @@ function RecipeDetailPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4">
         <img
           src={recipe.thumb}
           alt={recipe.name}
-          className="w-full h-96 object-cover"
+          className="w-full h-96 object-cover rounded-lg"
         />
-        <div className="p-6">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">
-            {recipe.name}
-          </h1>
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
+            <Subtitle>{recipe.name}</Subtitle>
+            <div className="flex items-center gap-2 px-3 py-0.5 rounded-md text-sm font-semibold transition-all duration-200 cursor-pointer bg-red-50 text-red-800 border border-red-200 w-fit">
+              {recipe.category}
+            </div>
+          </div>
 
-          <div className="mb-6">
-            <h2 className="text-xl font-semibold text-gray-700 mb-2">
+          <div className="flex flex-col gap-3">
+            <h2 className="text-base font-medium text-gray-700 border-b border-gray-100 pb-2">
               Ingredients
             </h2>
-            <ul className="list-disc list-inside space-y-1">
+            <ul className="flex flex-col gap-2">
               {ingredients.map((item, index) => (
-                <li key={index} className="text-gray-600">
+                <li
+                  key={index}
+                  className="text-sm text-gray-600 flex items-center gap-2"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
                   {item.measure} {item.ingredient}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div>
-            <h2 className="text-xl font-semibold text-gray-700 mb-2">
-              Instructions
-            </h2>
-            <p className="text-gray-600 whitespace-pre-line">
+          <div className="flex flex-col gap-3">
+            <Subtitle>Instructions</Subtitle>
+            <p className="text-sm text-gray-600 whitespace-pre-line leading-relaxed">
               {recipe.instructions}
             </p>
           </div>
 
           {recipe.youtube && (
-            <div className="mt-6">
-              <h2 className="text-xl font-semibold text-gray-700 mb-2">
-                Video Tutorial
-              </h2>
-              <a
-                href={recipe.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:text-blue-600"
-              >
-                Watch on YouTube
-              </a>
+            <div className="flex flex-col gap-3">
+              <Subtitle>Video Tutorial</Subtitle>
+              <div className="aspect-video w-full">
+                <iframe
+                  src={`https://www.youtube.com/embed/${getYouTubeVideoId(
+                    recipe.youtube
+                  )}`}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full rounded-lg"
+                />
+              </div>
             </div>
           )}
         </div>

@@ -1,13 +1,14 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import Layout from "./components/layout/layout";
 import RecipeDetailPage from "./components/recipe-detail/recipe-detail";
+import { ROUTES } from "./consts/routes.const";
 import FavoritePage from "./pages/favorite-page";
 import RecipePage from "./pages/recipe-page";
 import "./styles.css";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: ROUTES.HOME,
     element: <Layout />,
     children: [
       {
@@ -15,11 +16,11 @@ const router = createBrowserRouter([
         element: <RecipePage />,
       },
       {
-        path: "recipe/:id",
+        path: ROUTES.RECIPE,
         element: <RecipeDetailPage />,
       },
       {
-        path: "favorites",
+        path: ROUTES.FAVORITES,
         element: <FavoritePage />,
       },
     ],

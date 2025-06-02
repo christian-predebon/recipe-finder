@@ -1,16 +1,13 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
-import Layout, { LAYOUT_TITLE } from "./layout";
+import { render, screen } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import Layout from "./layout";
 
-const navigateSpy = vi.fn();
-
-vi.mock("react-router", () => ({
-  useNavigate: () => navigateSpy,
-  Outlet: () => <div>Outlet</div>,
+vi.mock("@/components/header/header", () => ({
+  default: vi.fn(() => <div>Header</div>),
 }));
 
-vi.mock("react-feather", () => ({
-  Bookmark: () => <div>Bookmark</div>,
+vi.mock("react-router", () => ({
+  Outlet: () => <div>Outlet</div>,
 }));
 
 describe(Layout.name, () => {
@@ -18,18 +15,15 @@ describe(Layout.name, () => {
     vi.clearAllMocks();
   });
 
-  it("renders correctly the title", () => {
+  it("renders correctly the children", () => {
     render(<Layout />);
 
-    expect(screen.getByText(LAYOUT_TITLE)).toBeInTheDocument();
+    expect(screen.getByText("Header")).toBeInTheDocument();
   });
 
-  it("navigates to favorites page when clicking the favorite button", () => {
+  it("renders correctly the outlet", () => {
     render(<Layout />);
 
-    const favoriteButton = screen.getAllByRole("button")[0];
-    fireEvent.click(favoriteButton);
-
-    expect(navigateSpy).toHaveBeenCalledWith("/favorites");
+    expect(screen.getByText("Outlet")).toBeInTheDocument();
   });
 });

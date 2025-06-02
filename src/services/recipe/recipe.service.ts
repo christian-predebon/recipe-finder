@@ -1,4 +1,5 @@
 import { IRecipeCategory } from "./entities/recipe-category.entity";
+import { IRecipeGroups } from "./entities/recipe-group.entity";
 import { IRecipeSearch } from "./entities/recipe-search.entity";
 import { IRecipe } from "./entities/recipe.entity";
 import { IRecipeService } from "./recipe.service.interface";
@@ -26,5 +27,9 @@ export class RecipeService implements IRecipeService {
 
   async getRecipeById(recipeId: string): Promise<IRecipe> {
     return this._repository.getRecipeById(recipeId);
+  }
+
+  async getRecipesGroupedByCategory(): Promise<IRecipeGroups> {
+    return this._repository.getRecipesGroupedByCategory();
   }
 }

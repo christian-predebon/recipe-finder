@@ -1,50 +1,54 @@
-import RecipeCategories from "@/components/recipe-categories/recipe-categories";
-import RecipeSearch from "@/components/recipe-search/recipe-search";
-import RecipeList from "@/components/recipe/recipe-list";
-import { useRecipes } from "@/hooks/use-recipes/use-recipes";
-import { useState } from "react";
-import { useDebounce } from "use-debounce";
-
-const DEBOUNCE_TIME = 500;
+import RecipeGroups from "@/components/recipe/recipe-groups";
+import {
+  RECIPE_PAGE_DESCRIPTION,
+  RECIPE_PAGE_TITLE,
+} from "@/consts/text.const";
+import { useRecipesGrouped } from "@/hooks/use-recipes-grouped/use-recipes-grouped";
 
 function RecipePage() {
-  const [recipeIngredient, setRecipeIngredient] = useState("");
-  const [debouncedRecipeIngredient] = useDebounce(
-    recipeIngredient,
-    DEBOUNCE_TIME
-  );
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const { groupedRecipes, isLoading, error } = useRecipesGrouped();
 
-  const { recipes, isLoading, error } = useRecipes(
-    debouncedRecipeIngredient,
-    selectedCategory
-  );
+  if (error) {
+    return (
+      <div className="text-center py-4">
+        <p className="text-red-500">Error loading recipes</p>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="space-y-12">
+        {[1, 2, 3].map((groupIndex) => (
+          <div key={groupIndex} className="space-y-4">
+            <div className="h-8 w-48 bg-gray-200 rounded animate-pulse" />
+            <div className="flex gap-4 overflow-x-auto pb-4">
+              {[1, 2, 3, 4].map((recipeIndex) => (
+                <div
+                  key={recipeIndex}
+                  className="flex-none w-72 bg-white rounded-xl overflow-hidden border border-gray-200"
+                >
+                  <div className="relative aspect-[4/3] bg-gray-200 animate-pulse" />
+                  <div className="p-3">
+                    <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-8">
-      <RecipeSearch
-        recipeIngredient={recipeIngredient}
-        setRecipeIngredient={setRecipeIngredient}
-      />
+      <div className="flex flex-col gap-1">
+        <p className="text-3xl">{RECIPE_PAGE_TITLE}</p>
+        <p className="text-md text-gray-600">{RECIPE_PAGE_DESCRIPTION}</p>
+      </div>
 
-      <RecipeCategories
-        onCategorySelect={setSelectedCategory}
-        selectedCategory={selectedCategory}
-      />
-
-      {isLoading && (
-        <div className="flex justify-center py-8">
-          <div className="w-6 h-6 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      )}
-
-      {error && (
-        <div className="text-center py-4">
-          <p className="text-red-500">Error loading recipes</p>
-        </div>
-      )}
-
-      {recipes && <RecipeList recipes={recipes} />}
+      {groupedRecipes && <RecipeGroups groupedRecipes={groupedRecipes} />}
     </div>
   );
 }
