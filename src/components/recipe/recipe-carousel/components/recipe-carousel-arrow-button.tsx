@@ -1,14 +1,14 @@
-interface ArrowButtonProps {
+interface RecipeCarouselArrowButtonProps {
   onClick: () => void;
   children: React.ReactNode;
   disabled: boolean;
 }
 
-function ArrowButton({
+function RecipeCarouselArrowButton({
   onClick,
   children,
   disabled,
-}: Readonly<ArrowButtonProps>) {
+}: Readonly<RecipeCarouselArrowButtonProps>) {
   return (
     <button
       onClick={onClick}
@@ -20,4 +20,4 @@ function ArrowButton({
   );
 }
 
-export default ArrowButton;
+export default RecipeCarouselArrowButton;

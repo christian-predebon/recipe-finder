@@ -2,8 +2,8 @@ import { useRecipeCarousel } from "@/hooks/use-recipe-carousel/use-recipe-carous
 import { IRecipeSearch } from "@/services/recipe/entities/recipe-search.entity";
 import { useNavigate } from "react-router";
 import Subtitle from "../../input/typography/subtitle";
-import RecipeCarouselItem from "./recipe-carousel-item";
-import RecipeCarouselNavigation from "./recipe-carousel-navigation";
+import RecipeCarouselItem from "./components/recipe-carousel-item";
+import RecipeCarouselNavigation from "./components/recipe-carousel-navigation";
 
 interface RecipeCarouselProps {
   categoryName: string;

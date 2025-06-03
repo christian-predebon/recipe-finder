@@ -9,7 +9,7 @@ import { IRecipe } from "../entities/recipe.entity";
 import { IRecipeDatasource } from "./recipe.datasource.interface";
 
 interface IRecipeResponse {
-  meals: RecipeSearchDto[];
+  meals: RecipeSearchDto[] | null;
 }
 
 interface IRecipeCategoryResponse {
@@ -17,11 +17,12 @@ interface IRecipeCategoryResponse {
 }
 
 interface IRecipeDetailResponse {
-  meals: RecipeDto[];
+  meals: RecipeDto[] | null;
 }
 
 export class RecipeDatasource implements IRecipeDatasource {
   private readonly _RECIPE_INGREDIENTS_ENDPOINT = "/filter.php?i";
+  private readonly _RECIPE_SEARCH_NAME_ENDPOINT = "/search.php?s";
   private readonly _RECIPE_CATEGORY_ENDPOINT = "/filter.php?c";
   private readonly _RECIPE_CATEGORIES_ENDPOINT = "/categories.php";
   private readonly _RECIPE_DETAIL_ENDPOINT = "/lookup.php?i";
@@ -35,6 +36,24 @@ export class RecipeDatasource implements IRecipeDatasource {
       `${this._RECIPE_INGREDIENTS_ENDPOINT}=${recipeIngredient}`
     );
 
+    if (!response.data.meals) {
+      return [];
+    }
+
+    const mappedRecipes = response.data.meals.map(this.mapRecipeSearch);
+
+    return mappedRecipes;
+  }
+
+  async getRecipesByName(recipeName: string): Promise<IRecipeSearch[]> {
+    const response = await this._client.get<IRecipeResponse>(
+      `${this._RECIPE_SEARCH_NAME_ENDPOINT}=${recipeName}`
+    );
+
+    if (!response.data.meals) {
+      return [];
+    }
+
     const mappedRecipes = response.data.meals.map(this.mapRecipeSearch);
 
     return mappedRecipes;
@@ -44,6 +63,10 @@ export class RecipeDatasource implements IRecipeDatasource {
     const response = await this._client.get<IRecipeResponse>(
       `${this._RECIPE_CATEGORY_ENDPOINT}=${recipeCategory}`
     );
+
+    if (!response.data.meals) {
+      return [];
+    }
 
     const mappedRecipes = response.data.meals.map(this.mapRecipeSearch);
 
@@ -67,12 +90,16 @@ export class RecipeDatasource implements IRecipeDatasource {
       `${this._RECIPE_DETAIL_ENDPOINT}=${recipeId}`
     );
 
+    if (!response.data.meals) {
+      throw new Error("Recipe not found");
+    }
+
     const mappedRecipe = this.mapRecipe(response.data.meals[0]);
 
     return mappedRecipe;
   }
 
-  private mapRecipeCategory(category: RecipeCategoryDto): IRecipeCategory {
+  private mapRecipeCategory(category: Readonly<RecipeCategoryDto>): IRecipeCategory {
     return {
       id: category.idCategory,
       name: category.strCategory,
@@ -81,7 +108,7 @@ export class RecipeDatasource implements IRecipeDatasource {
     };
   }
 
-  private mapRecipeSearch(recipe: RecipeSearchDto): IRecipeSearch {
+  private mapRecipeSearch(recipe: Readonly<RecipeSearchDto>): IRecipeSearch {
     return {
       id: recipe.idMeal,
       name: recipe.strMeal,
@@ -89,7 +116,7 @@ export class RecipeDatasource implements IRecipeDatasource {
     };
   }
 
-  private mapRecipe(recipe: RecipeDto): IRecipe {
+  private mapRecipe(recipe: Readonly<RecipeDto>): IRecipe {
     return {
       id: recipe.idMeal,
       name: recipe.strMeal,

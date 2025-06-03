@@ -5,6 +5,7 @@ import { IRecipe } from "../entities/recipe.entity";
 
 export interface IRecipeRepository {
   getRecipesByIngredient(recipeIngredient: string): Promise<IRecipeSearch[]>;
+  getRecipesByName(recipeName: string): Promise<IRecipeSearch[]>;
   getRecipesByCategory(recipeCategory: string): Promise<IRecipeSearch[]>;
   getAllCategories(): Promise<IRecipeCategory[]>;
   getRecipeById(recipeId: string): Promise<IRecipe>;

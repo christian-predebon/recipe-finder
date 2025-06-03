@@ -4,6 +4,7 @@ import RecipeDetailPage from "./components/recipe-detail/recipe-detail";
 import { ROUTES } from "./consts/routes.const";
 import FavoritePage from "./pages/favorite-page";
 import RecipePage from "./pages/recipe-page";
+import SearchPage from "./pages/recipe-search-page";
 import "./styles.css";
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: ROUTES.FAVORITES,
         element: <FavoritePage />,
+      },
+      {
+        path: ROUTES.SEARCH,
+        element: <SearchPage />,
       },
     ],
   },

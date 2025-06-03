@@ -17,8 +17,8 @@ export class RecipeService implements IRecipeService {
     return this._repository.getRecipesByIngredient(recipeIngredient);
   }
 
-  async getRecipesByCategory(recipeCategory: string): Promise<IRecipeSearch[]> {
-    return this._repository.getRecipesByCategory(recipeCategory);
+  async getRecipesByName(recipeName: string): Promise<IRecipeSearch[]> {
+    return this._repository.getRecipesByName(recipeName);
   }
 
   async getAllCategories(): Promise<IRecipeCategory[]> {

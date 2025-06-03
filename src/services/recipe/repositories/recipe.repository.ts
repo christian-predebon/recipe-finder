@@ -17,6 +17,10 @@ export class RecipeRepository implements IRecipeRepository {
     return this.datasource.getRecipesByIngredient(recipeIngredient);
   }
 
+  async getRecipesByName(recipeName: string): Promise<IRecipeSearch[]> {
+    return this.datasource.getRecipesByName(recipeName);
+  }
+
   async getRecipesByCategory(recipeCategory: string): Promise<IRecipeSearch[]> {
     return this.datasource.getRecipesByCategory(recipeCategory);
   }
@@ -36,8 +40,9 @@ export class RecipeRepository implements IRecipeRepository {
       categories.map(async (category) => {
         const recipes = await this.getRecipesByCategory(category.name);
 
+        const categoryName = category.name;
         return {
-          category: category.name,
+          category: categoryName,
           recipes,
         };
       })

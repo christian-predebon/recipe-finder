@@ -11,7 +11,6 @@ describe(RecipeService.name, () => {
   beforeEach(() => {
     mockRepository = {
       getRecipesByIngredient: vi.fn(),
-      getRecipesByCategory: vi.fn(),
       getAllCategories: vi.fn(),
       getRecipeById: vi.fn(),
       getRecipesGroupedByCategory: vi.fn(),
@@ -33,24 +32,6 @@ describe(RecipeService.name, () => {
 
       expect(mockRepository.getRecipesByIngredient).toHaveBeenCalledWith(
         ingredient
-      );
-      expect(result).toEqual(mockRecipes);
-    });
-  });
-
-  describe("getRecipesByCategory", () => {
-    it("should return recipes by category", async () => {
-      const category = "Beef";
-      const mockRecipes: IRecipeSearch[] = [
-        { id: "2", name: "Beef Stroganoff", thumb: "beef-stroganoff.jpg" },
-      ];
-
-      mockRepository.getRecipesByCategory.mockResolvedValue(mockRecipes);
-
-      const result = await service.getRecipesByCategory(category);
-
-      expect(mockRepository.getRecipesByCategory).toHaveBeenCalledWith(
-        category
       );
       expect(result).toEqual(mockRecipes);
     });

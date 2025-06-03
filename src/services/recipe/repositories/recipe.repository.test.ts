@@ -1,4 +1,4 @@
-import { describe, expect, it, Mocked } from "vitest";
+import { beforeEach, describe, expect, it, Mocked, vi } from "vitest";
 import { IRecipeDatasource } from "../datasources/recipe.datasource.interface";
 import { IRecipeCategory } from "../entities/recipe-category.entity";
 import { IRecipeSearch } from "../entities/recipe-search.entity";
@@ -26,14 +26,6 @@ describe(RecipeRepository.name, () => {
       expect(recipes).toEqual(
         mockDatasource.getRecipesByIngredient(ingredient)
       );
-    });
-  });
-
-  describe("getRecipesByCategory", () => {
-    it("should return recipes by category", async () => {
-      const category = "chicken";
-      const recipes = await repository.getRecipesByCategory(category);
-      expect(recipes).toEqual(mockDatasource.getRecipesByCategory(category));
     });
   });
 

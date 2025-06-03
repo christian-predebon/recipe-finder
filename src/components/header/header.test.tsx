@@ -13,6 +13,7 @@ vi.mock("react-router", () => ({
 vi.mock("react-feather", () => ({
   Heart: () => <div>Heart</div>,
   Menu: () => <div>Menu</div>,
+  Search: () => <div>Search</div>,
 }));
 
 vi.mock("@/hooks/use-is-small-screen/use-is-small-screen", () => ({
