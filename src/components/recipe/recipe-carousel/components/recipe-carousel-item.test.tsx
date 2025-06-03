@@ -4,18 +4,6 @@ import RecipeCarouselItem from "./recipe-carousel-item";
 
 const mockHandleRecipeClick = vi.fn();
 
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({
-      children,
-      ...props
-    }: {
-      children: React.ReactNode;
-      [key: string]: unknown;
-    }) => <div {...props}>{children}</div>,
-  },
-}));
-
 describe(RecipeCarouselItem.name, () => {
   it("should render the recipe name", () => {
     render(

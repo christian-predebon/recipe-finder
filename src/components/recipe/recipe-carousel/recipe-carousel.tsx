@@ -1,6 +1,6 @@
 import { useRecipeCarousel } from "@/hooks/use-recipe-carousel/use-recipe-carousel";
 import { IRecipeSearch } from "@/services/recipe/entities/recipe-search.entity";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import Subtitle from "../../input/typography/subtitle";
 import RecipeCarouselItem from "./components/recipe-carousel-item";
 import RecipeCarouselNavigation from "./components/recipe-carousel-navigation";

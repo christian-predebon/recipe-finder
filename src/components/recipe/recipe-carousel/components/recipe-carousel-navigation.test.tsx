@@ -9,6 +9,10 @@ vi.mock("react-feather", () => ({
 }));
 
 describe(RecipeCarouselNavigation.name, () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("should render the left and right arrows when showLeftArrow and showRightArrow are true", () => {
     render(
       <RecipeCarouselNavigation

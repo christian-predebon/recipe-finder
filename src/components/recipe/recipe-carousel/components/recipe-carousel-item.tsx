@@ -1,5 +1,4 @@
 import { IRecipeSearch } from "@/services/recipe/entities/recipe-search.entity";
-import { motion } from "framer-motion";
 
 interface RecipeCarouselItemProps {
   recipe: IRecipeSearch;
@@ -11,7 +10,7 @@ function RecipeCarouselItem({
   handleRecipeClick,
 }: Readonly<RecipeCarouselItemProps>) {
   return (
-    <motion.div
+    <div
       onClick={() => handleRecipeClick(recipe.id)}
       className="flex-none w-72 snap-start cursor-pointer"
     >
@@ -27,7 +26,7 @@ function RecipeCarouselItem({
           <h3 className="text-gray-800 text-sm">{recipe.name}</h3>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 

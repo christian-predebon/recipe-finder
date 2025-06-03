@@ -1,6 +1,6 @@
 import { useRecipeById } from "@/hooks/use-recipe-by-id/use-recipe-by-id";
 import { IRecipe } from "@/services/recipe/entities/recipe.entity";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import Subtitle from "../input/typography/subtitle";
 
 function RecipeDetailPage() {

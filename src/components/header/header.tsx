@@ -1,21 +1,15 @@
 import logoSource from "@/assets/recipe-book.png";
 import { ROUTES } from "@/consts/routes.const";
-import {
-  BOOKMARK_BUTTON_TEXT,
-  HEADER_TITLE,
-  SEARCH_BUTTON_TEXT,
-} from "@/consts/text.const";
+import { HEADER_TITLE } from "@/consts/text.const";
 import useHeaderMenuState from "@/hooks/use-header-menu-state/use-header-menu-state";
-import useIsSmallScreen from "@/hooks/use-is-small-screen/use-is-small-screen";
 import { useEffect } from "react";
-import { Heart, Menu, Search } from "react-feather";
-import { useNavigate } from "react-router";
-import Button from "../input/button/button";
+import { useNavigate } from "react-router-dom";
+import HeaderActions from "./components/header-actions";
+import HeaderMenuPopup from "./components/header-menu-popup";
 
 function Header() {
   const navigate = useNavigate();
-  const { isMenuOpen, menuRef, openMenu, closeMenu } = useHeaderMenuState();
-  const isSmallScreen = useIsSmallScreen();
+  const { isMenuOpen, menuRef, closeMenu, openMenu } = useHeaderMenuState();
 
   useEffect(function detectClickOutside() {
     function handleClickOutside(event: MouseEvent) {
@@ -60,45 +54,15 @@ function Header() {
             </h2>
           </div>
           <div className="flex items-center gap-2">
-            <Button
-              onClick={navigateToSearch}
-              icon={<Search className="h-5 w-5" />}
-              title={!isSmallScreen ? SEARCH_BUTTON_TEXT : undefined}
-            />
-            <div className="relative" ref={menuRef}>
-              {isSmallScreen ? (
-                <Button
-                  onClick={openMenu}
-                  icon={<Menu className="h-5 w-5" />}
-                />
-              ) : (
-                <Button
-                  onClick={navigateToFavorites}
-                  icon={
-                    <Heart
-                      className="h-3.5 w-3.5 text-red-dark"
-                      fill="currentColor"
-                    />
-                  }
-                  title={BOOKMARK_BUTTON_TEXT}
-                />
-              )}
+            <div ref={menuRef}>
+              <HeaderActions
+                onClickFavorites={navigateToFavorites}
+                onClickSearch={navigateToSearch}
+                onOpenMenu={openMenu}
+              />
 
               {isMenuOpen && (
-                <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                  <div className="py-1" role="menu" aria-orientation="vertical">
-                    <button
-                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
-                      onClick={navigateToFavorites}
-                    >
-                      <Heart
-                        className="h-3.5 w-3.5 text-red-dark"
-                        fill="currentColor"
-                      />
-                      {BOOKMARK_BUTTON_TEXT}
-                    </button>
-                  </div>
-                </div>
+                <HeaderMenuPopup onClickFavorites={navigateToFavorites} />
               )}
             </div>
           </div>

@@ -1,7 +1,13 @@
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/layout/layout";
 import RecipeDetailPage from "./components/recipe-detail/recipe-detail";
 import { ROUTES } from "./consts/routes.const";
+import {
+  BOOKMARK_BUTTON_TEXT,
+  HOME_BUTTON_TEXT,
+  RECIPE_DETAIL_PAGE_TITLE,
+  SEARCH_BUTTON_TEXT,
+} from "./consts/text.const";
 import FavoritePage from "./pages/favorite-page";
 import RecipePage from "./pages/recipe-page";
 import SearchPage from "./pages/recipe-search-page";
@@ -11,6 +17,7 @@ const router = createBrowserRouter([
   {
     path: ROUTES.HOME,
     element: <Layout />,
+    handle: { breadcrumb: HOME_BUTTON_TEXT },
     children: [
       {
         index: true,
@@ -19,14 +26,17 @@ const router = createBrowserRouter([
       {
         path: ROUTES.RECIPE,
         element: <RecipeDetailPage />,
+        handle: { breadcrumb: RECIPE_DETAIL_PAGE_TITLE },
       },
       {
         path: ROUTES.FAVORITES,
         element: <FavoritePage />,
+        handle: { breadcrumb: BOOKMARK_BUTTON_TEXT },
       },
       {
         path: ROUTES.SEARCH,
         element: <SearchPage />,
+        handle: { breadcrumb: SEARCH_BUTTON_TEXT },
       },
     ],
   },

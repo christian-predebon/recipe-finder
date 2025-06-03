@@ -1,5 +1,5 @@
 import { IRecipeSearch } from "@/services/recipe/entities/recipe-search.entity";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import RecipeCarouselItem from "../recipe-carousel/components/recipe-carousel-item";
 
 interface RecipeSearchListProps {
