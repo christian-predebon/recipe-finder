@@ -1,9 +1,4 @@
-<center>
-# Recipe Finder
-
-![Recipe Book](./src/assets/recipe-book.png)
-
-</center>
+### Recipe Finder
 
 ### How to setup
 
@@ -36,7 +31,11 @@ The project is inspired by the principles of Hexagonal Architecture, aiming to c
 
 ### Testing
 
-The project uses Vitest for testing. The tests are located at the same level of the files they are testing.
+The project uses Vitest for testing. The tests are located at the same level of the files they are testing. You can check the coverage by running `npm run test:coverage`.
+
+### Build analysis
+
+You can check the build analysis by running `npm run build:analyze`. It uses [Rsdoctor](https://rsdoctor.rs/).
 
 ### API
 
