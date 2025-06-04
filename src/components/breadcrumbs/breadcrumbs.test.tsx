@@ -19,6 +19,8 @@ describe(Breadcrumbs.name, () => {
   it("should render the breadcrumbs", () => {
     render(<Breadcrumbs />);
 
-    expect(screen.getByText("Home")).toBeInTheDocument();
+    const breadcrumbText = screen.getByText("Home");
+
+    expect(breadcrumbText).toBeInTheDocument();
   });
 });

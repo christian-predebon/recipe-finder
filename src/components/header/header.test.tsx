@@ -4,6 +4,7 @@ import {
   HEADER_TITLE,
   SEARCH_BUTTON_TEXT,
 } from "@/consts/text.const";
+import useHeaderMenuState from "@/hooks/use-header-menu-state/use-header-menu-state";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import Header from "./header";
@@ -15,12 +16,7 @@ vi.mock("react-router-dom", () => ({
 
 const mockOpenMenu = vi.fn();
 vi.mock("@/hooks/use-header-menu-state/use-header-menu-state", () => ({
-  default: vi.fn(() => ({
-    isMenuOpen: false,
-    menuRef: { current: null },
-    openMenu: mockOpenMenu,
-    closeMenu: vi.fn(),
-  })),
+  default: vi.fn(),
 }));
 
 vi.mock("@/components/header/components/header-actions", () => ({
@@ -46,13 +42,24 @@ vi.mock("@/components/header/components/header-menu-popup", () => ({
 
 describe(Header.name, () => {
   beforeEach(() => {
+    vi.mocked(useHeaderMenuState).mockReturnValue({
+      isMenuOpen: false,
+      menuRef: { current: null },
+      openMenu: mockOpenMenu,
+      closeMenu: vi.fn(),
+    });
+  });
+
+  afterEach(() => {
     vi.clearAllMocks();
   });
 
   it("renders correctly the title", () => {
     render(<Header />);
 
-    expect(screen.getByText(HEADER_TITLE)).toBeInTheDocument();
+    const title = screen.getByText(HEADER_TITLE);
+    
+    expect(title).toBeInTheDocument();
   });
 
   it("navigates to home page when clicking the title", () => {

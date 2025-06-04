@@ -52,4 +52,5 @@ export type RecipeDto = {
   strImageSource: string | null;
   strCreativeCommonsConfirmed: string | null;
   dateModified: string | null;
+  ingredients: string[];
 }

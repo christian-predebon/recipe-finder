@@ -1,10 +1,11 @@
 import RecipeCarouselArrowButton from "@/components/recipe/recipe-carousel/components/recipe-carousel-arrow-button";
+import { ScrollDirection } from "@/hooks/use-recipe-carousel/use-recipe-carousel";
 import { ChevronLeft, ChevronRight } from "react-feather";
 
 interface RecipeCarouselNavigationProps {
   showLeftArrow: boolean;
   showRightArrow: boolean;
-  scroll: (direction: "left" | "right") => void;
+  scroll: (direction: ScrollDirection) => void;
 }
 
 function RecipeCarouselNavigation({
@@ -15,13 +16,13 @@ function RecipeCarouselNavigation({
   return (
     <div className="flex gap-2">
       <RecipeCarouselArrowButton
-        onClick={() => scroll("left")}
+        onClick={() => scroll(ScrollDirection.LEFT)}
         disabled={!showLeftArrow}
       >
         <ChevronLeft className="w-5 h-5 text-gray-600" />
       </RecipeCarouselArrowButton>
       <RecipeCarouselArrowButton
-        onClick={() => scroll("right")}
+        onClick={() => scroll(ScrollDirection.RIGHT)}
         disabled={!showRightArrow}
       >
         <ChevronRight className="w-5 h-5 text-gray-600" />

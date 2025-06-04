@@ -1,6 +1,12 @@
+import ErrorComponent from "@/components/error/error";
 import Subtitle from "@/components/input/typography/subtitle";
 import RecipeSearch from "@/components/recipe-search/recipe-search";
 import RecipeSearchList from "@/components/recipe/recipe-search-list/recipe-search-list";
+import {
+  RECIPE_SEARCH_PAGE_DESCRIPTION,
+  RECIPE_SEARCH_PAGE_NO_RESULTS,
+  SEARCH_BUTTON_TEXT,
+} from "@/consts/text.const";
 import {
   SearchType,
   useRecipeSearch,
@@ -23,12 +29,10 @@ function SearchPage() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-24">
+    <div className="max-w-7xl mx-auto py-24">
       <div className="mb-8">
-        <Subtitle>Cerca ricette</Subtitle>
-        <p className="text-gray-600 mt-2">
-          Trova le ricette che preferisci in base agli ingredienti o al nome
-        </p>
+        <Subtitle>{SEARCH_BUTTON_TEXT}</Subtitle>
+        <p className="text-gray-600 mt-2">{RECIPE_SEARCH_PAGE_DESCRIPTION}</p>
       </div>
 
       <div className="mb-8">
@@ -46,13 +50,7 @@ function SearchPage() {
         </div>
       )}
 
-      {error && (
-        <div className="text-center py-4">
-          <p className="text-red-500">
-            Errore durante la ricerca delle ricette
-          </p>
-        </div>
-      )}
+      {error && <ErrorComponent />}
 
       {!isLoading && !error && recipes.length > 0 && (
         <RecipeSearchList recipes={recipes} />
@@ -60,7 +58,7 @@ function SearchPage() {
 
       {!isLoading && !error && recipes.length === 0 && searchQuery && (
         <div className="text-center py-4">
-          <p className="text-gray-500">Nessuna ricetta trovata</p>
+          <p className="text-gray-500">{RECIPE_SEARCH_PAGE_NO_RESULTS}</p>
         </div>
       )}
     </div>

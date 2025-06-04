@@ -54,4 +54,5 @@ export const mockRecipeDto: RecipeDto = {
   strImageSource: null,
   strCreativeCommonsConfirmed: null,
   dateModified: null,
+  ingredients: [],
 };

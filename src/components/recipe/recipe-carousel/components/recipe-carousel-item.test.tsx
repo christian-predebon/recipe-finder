@@ -4,6 +4,10 @@ import RecipeCarouselItem from "./recipe-carousel-item";
 
 const mockHandleRecipeClick = vi.fn();
 
+vi.mock("@/hooks/use-is-small-screen/use-is-small-screen", () => ({
+  default: vi.fn().mockReturnValue(false),
+}));
+
 describe(RecipeCarouselItem.name, () => {
   it("should render the recipe name", () => {
     render(
@@ -13,7 +17,9 @@ describe(RecipeCarouselItem.name, () => {
       />
     );
 
-    expect(screen.getByText(mockRecipeSearchEntity.name)).toBeInTheDocument();
+    const recipeName = screen.getByText(mockRecipeSearchEntity.name);
+
+    expect(recipeName).toBeInTheDocument();
   });
 
   it("should call handleRecipeClick when the recipe is clicked", () => {

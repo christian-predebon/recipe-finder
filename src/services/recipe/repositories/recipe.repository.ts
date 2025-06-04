@@ -3,7 +3,7 @@ import { IRecipeDatasource } from "../datasources/recipe.datasource.interface";
 import { IRecipeCategory } from "../entities/recipe-category.entity";
 import { IRecipeGroups } from "../entities/recipe-group.entity";
 import { IRecipeSearch } from "../entities/recipe-search.entity";
-import { IRecipe } from "../entities/recipe.entity";
+import { IRecipe, IRecipeIngredient } from "../entities/recipe.entity";
 import { IRecipeRepository } from "./recipe.repository.interface";
 
 export class RecipeRepository implements IRecipeRepository {
@@ -30,7 +30,11 @@ export class RecipeRepository implements IRecipeRepository {
   }
 
   async getRecipeById(recipeId: string): Promise<IRecipe> {
-    return this.datasource.getRecipeById(recipeId);
+    const recipe = await this.datasource.getRecipeById(recipeId);
+    return {
+      ...recipe,
+      ingredients: this.normalizeIngredients(recipe),
+    };
   }
 
   async getRecipesGroupedByCategory(): Promise<IRecipeGroups> {
@@ -49,5 +53,31 @@ export class RecipeRepository implements IRecipeRepository {
     );
 
     return { groups };
+  }
+
+  private normalizeIngredients(recipe: IRecipe): IRecipeIngredient[] {
+    const MAX_INGREDIENTS = 20;
+
+    const ingredients = Array.from({ length: MAX_INGREDIENTS }, (_, index) => {
+      const ingredientIndex = index + 1;
+      const ingredient =
+        recipe[`ingredient${ingredientIndex}` as keyof IRecipe];
+      const measure = recipe[`measure${ingredientIndex}` as keyof IRecipe];
+
+      if (this.isValidIngredient(ingredient)) {
+        return { ingredient, measure } as IRecipeIngredient;
+      }
+      return null;
+    });
+
+    const nonNullIngredients = ingredients.filter(
+      (ingredient) => ingredient !== null
+    );
+
+    return nonNullIngredients;
+  }
+
+  private isValidIngredient(ingredient: unknown): ingredient is string {
+    return typeof ingredient === "string" && ingredient.trim().length > 0;
   }
 }

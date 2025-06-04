@@ -22,18 +22,24 @@ describe(Layout.name, () => {
   it("renders correctly the children", () => {
     render(<Layout />);
 
-    expect(screen.getByText("Header")).toBeInTheDocument();
+    const header = screen.getByText("Header");
+    
+    expect(header).toBeInTheDocument();
   });
 
   it("renders correctly the breadcrumbs", () => {
     render(<Layout />);
 
-    expect(screen.getByText("Breadcrumbs")).toBeInTheDocument();
+    const breadcrumbs = screen.getByText("Breadcrumbs");
+
+    expect(breadcrumbs).toBeInTheDocument();
   });
 
   it("renders correctly the outlet", () => {
     render(<Layout />);
 
-    expect(screen.getByText("Outlet")).toBeInTheDocument();
+    const outlet = screen.getByText("Outlet");
+
+    expect(outlet).toBeInTheDocument();
   });
 });

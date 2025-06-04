@@ -1,3 +1,4 @@
+import useIsSmallScreen from "@/hooks/use-is-small-screen/use-is-small-screen";
 import { IRecipeSearch } from "@/services/recipe/entities/recipe-search.entity";
 
 interface RecipeCarouselItemProps {
@@ -9,10 +10,14 @@ function RecipeCarouselItem({
   recipe,
   handleRecipeClick,
 }: Readonly<RecipeCarouselItemProps>) {
+  const isSmallScreen = useIsSmallScreen();
+
+  const boxWidth = isSmallScreen ? "w-full" : "w-72";
+
   return (
     <div
       onClick={() => handleRecipeClick(recipe.id)}
-      className="flex-none w-72 snap-start cursor-pointer"
+      className={`flex-none snap-start cursor-pointer ${boxWidth}`}
     >
       <div className="rounded-xl overflow-hidden">
         <div className="relative aspect-[4/3] rounded-xl">

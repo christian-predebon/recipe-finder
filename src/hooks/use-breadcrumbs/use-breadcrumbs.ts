@@ -15,11 +15,13 @@ function useBreadcrumbs(): BreadcrumbItem[] {
 
   return matches
     .filter((match) => (match.handle as BreadcrumbHandle)?.breadcrumb)
-    .map((match, index) => ({
-      pathname: match.pathname,
-      title: (match.handle as BreadcrumbHandle).breadcrumb,
-      isLast: index === matches.length - 1,
-    }));
+    .map(function mapBreadcrumbs(match, index) {
+      return {
+        pathname: match.pathname,
+        title: (match.handle as BreadcrumbHandle).breadcrumb,
+        isLast: index === matches.length - 1,
+      };
+    });
 }
 
 export default useBreadcrumbs;

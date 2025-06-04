@@ -1,3 +1,4 @@
+import { mockRecipeEntity } from "@/tests/fixtures/mock-recipe-entity";
 import { beforeEach, describe, expect, it, Mocked, vi } from "vitest";
 import { IRecipeDatasource } from "../datasources/recipe.datasource.interface";
 import { IRecipeCategory } from "../entities/recipe-category.entity";
@@ -37,10 +38,33 @@ describe(RecipeRepository.name, () => {
   });
 
   describe("getRecipeById", () => {
-    it("should return a recipe by id", async () => {
+    it("should return a recipe by id with normalized ingredients", async () => {
       const id = "1";
+      mockDatasource.getRecipeById.mockResolvedValue(mockRecipeEntity);
+
       const recipe = await repository.getRecipeById(id);
-      expect(recipe).toEqual(mockDatasource.getRecipeById(id));
+
+      expect(mockDatasource.getRecipeById).toHaveBeenCalledWith(id);
+      expect(recipe).toEqual({
+        ...mockRecipeEntity,
+        ingredients: [
+          { ingredient: "Ingredient 1", measure: "1 cup" },
+          { ingredient: "Ingredient 2", measure: "2 cups" },
+          { ingredient: "Ingredient 3", measure: "3 cups" },
+          { ingredient: "Ingredient 4", measure: "4 cups" },
+          { ingredient: "Ingredient 5", measure: "5 cups" },
+          { ingredient: "Ingredient 6", measure: "6 cups" },
+          { ingredient: "Ingredient 7", measure: "7 cups" },
+          { ingredient: "Ingredient 8", measure: "8 cups" },
+          { ingredient: "Ingredient 9", measure: "9 cups" },
+          { ingredient: "Ingredient 10", measure: "10 cups" },
+          { ingredient: "Ingredient 11", measure: "11 cups" },
+          { ingredient: "Ingredient 12", measure: "12 cups" },
+          { ingredient: "Ingredient 13", measure: "13 cups" },
+          { ingredient: "Ingredient 14", measure: "14 cups" },
+          { ingredient: "Ingredient 15", measure: "15 cups" },
+        ],
+      });
     });
   });
 
@@ -72,6 +96,7 @@ describe(RecipeRepository.name, () => {
       ];
 
       mockDatasource.getAllCategories.mockResolvedValue(mockCategories);
+
       mockDatasource.getRecipesByCategory.mockImplementation(
         (categoryName: string) => {
           if (categoryName === "Desserts")

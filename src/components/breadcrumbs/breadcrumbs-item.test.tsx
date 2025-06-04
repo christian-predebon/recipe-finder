@@ -21,8 +21,11 @@ describe(BreadcrumbsItem.name, () => {
     it("should render correctly the last breadcrumb", () => {
       render(<BreadcrumbsItem breadcrumb={{ ...breadcrumb, isLast: true }} />);
 
-      expect(screen.getByText("About")).toBeInTheDocument();
-      expect(screen.queryByText("Link")).not.toBeInTheDocument();
+      const breadcrumbText = screen.getByText("About");
+      const link = screen.queryByText("Link");
+
+      expect(breadcrumbText).toBeInTheDocument();
+      expect(link).not.toBeInTheDocument();
     });
   });
 
@@ -30,8 +33,11 @@ describe(BreadcrumbsItem.name, () => {
     it("should render correctly the first breadcrumb", () => {
       render(<BreadcrumbsItem breadcrumb={breadcrumb} />);
 
-      expect(screen.getByText("/")).toBeInTheDocument();
-      expect(screen.getByText("Link")).toBeInTheDocument();
+      const divider = screen.getByText("/");
+      const link = screen.getByText("Link");
+
+      expect(divider).toBeInTheDocument();
+      expect(link).toBeInTheDocument();
     });
   });
 });

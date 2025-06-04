@@ -62,7 +62,10 @@ function Header() {
               />
 
               {isMenuOpen && (
-                <HeaderMenuPopup onClickFavorites={navigateToFavorites} />
+                <HeaderMenuPopup
+                  onClickFavorites={navigateToFavorites}
+                  onClickSearch={navigateToSearch}
+                />
               )}
             </div>
           </div>

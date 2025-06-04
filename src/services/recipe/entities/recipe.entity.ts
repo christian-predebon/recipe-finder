@@ -1,3 +1,8 @@
+export interface IRecipeIngredient {
+  ingredient: string | null;
+  measure: string | null;
+}
+
 export interface IRecipe {
   id: string;
   name: string;
@@ -52,4 +57,6 @@ export interface IRecipe {
   imageSource: string | null;
   creativeCommonsConfirmed: string | null;
   dateModified: string | null;
+
+  ingredients?: IRecipeIngredient[];
 }

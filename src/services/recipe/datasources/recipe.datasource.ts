@@ -99,7 +99,9 @@ export class RecipeDatasource implements IRecipeDatasource {
     return mappedRecipe;
   }
 
-  private mapRecipeCategory(category: Readonly<RecipeCategoryDto>): IRecipeCategory {
+  private mapRecipeCategory(
+    category: Readonly<RecipeCategoryDto>
+  ): IRecipeCategory {
     return {
       id: category.idCategory,
       name: category.strCategory,
