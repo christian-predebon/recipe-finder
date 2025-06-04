@@ -20,6 +20,7 @@ function SearchInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
+        autoFocus
         className="w-full px-4 py-2.5 pl-10 text-gray-700 bg-white rounded-lg
                 border border-gray-200
                 focus:outline-none focus:ring-1 focus:ring-gray-200 focus:border-transparent

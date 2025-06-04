@@ -12,6 +12,15 @@ vi.mock("use-debounce", () => ({
   useDebounce: vi.fn((value) => [value]),
 }));
 
+vi.mock("@/hooks/use-search-state/use-search-state", () => ({
+  useSearchState: vi.fn(() => ({
+    searchQuery: "",
+    searchType: "ingredient",
+    handleSearchQueryChange: vi.fn(),
+    handleSearchTypeChange: vi.fn(),
+  })),
+}));
+
 vi.mock("@/hooks/use-recipe-search/use-recipe-search", () => ({
   useRecipeSearch: vi.fn(),
   SearchType: {

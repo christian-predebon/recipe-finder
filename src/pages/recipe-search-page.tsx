@@ -8,21 +8,20 @@ import {
   RECIPE_SEARCH_PAGE_NO_RESULTS,
   SEARCH_BUTTON_TEXT,
 } from "@/consts/text.const";
-import {
-  SearchType,
-  useRecipeSearch,
-} from "@/hooks/use-recipe-search/use-recipe-search";
-import { useState } from "react";
+import { useRecipeSearch } from "@/hooks/use-recipe-search/use-recipe-search";
+import { useSearchState } from "@/hooks/use-search-state/use-search-state";
 import { useDebounce } from "use-debounce";
 
 const DEBOUNCE_TIME = 500;
 
 function SearchPage() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const {
+    searchQuery,
+    searchType,
+    handleSearchQueryChange,
+    handleSearchTypeChange,
+  } = useSearchState();
   const [debouncedSearchQuery] = useDebounce(searchQuery, DEBOUNCE_TIME);
-  const [searchType, setSearchType] = useState<SearchType>(
-    SearchType.INGREDIENT
-  );
 
   const { recipes, isLoading, error } = useRecipeSearch(
     debouncedSearchQuery,
@@ -39,9 +38,9 @@ function SearchPage() {
       <div className="mb-8">
         <RecipeSearch
           searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
+          setSearchQuery={handleSearchQueryChange}
           searchType={searchType}
-          setSearchType={setSearchType}
+          setSearchType={handleSearchTypeChange}
         />
       </div>
 
