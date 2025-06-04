@@ -5,11 +5,16 @@ import RecipeDetailInstructions from "@/components/recipe-detail/recipe-detail-i
 import RecipeDetailVideo from "@/components/recipe-detail/recipe-detail-video";
 import RecipeDetailSkeleton from "@/components/skeleton/recipe-detail-skeleton";
 import { useRecipeById } from "@/hooks/use-recipe-by-id/use-recipe-by-id";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 function RecipeDetailPage() {
   const { id } = useParams();
   const { recipe, isLoading, error } = useRecipeById(id);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (isLoading) {
     return <RecipeDetailSkeleton />;
