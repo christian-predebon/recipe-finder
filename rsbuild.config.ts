@@ -6,4 +6,7 @@ export default defineConfig({
   source: {
     exclude: [/\.test\.(tsx?|jsx?)$/],
   },
+  html: {
+    title: "Recipe finder",
+  },
 });

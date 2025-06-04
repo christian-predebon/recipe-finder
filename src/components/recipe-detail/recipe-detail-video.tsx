@@ -1,6 +1,6 @@
 import Subtitle from "@/components/input/typography/subtitle";
 import { RECIPE_DETAIL_PAGE_VIDEO_TITLE } from "@/consts/text.const";
-import { extractYouTubeVideoId } from "../utils/extract-youtube-video-id";
+import { extractYouTubeVideoId } from "./utils/extract-youtube-video-id";
 
 interface RecipeDetailVideoProps {
   youtubeId: string;

@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/layout/layout";
-import RecipeDetailPage from "./components/recipe-detail/recipe-detail";
 import { ROUTES } from "./consts/routes.const";
 import {
   BOOKMARK_BUTTON_TEXT,
@@ -9,6 +8,7 @@ import {
   SEARCH_BUTTON_TEXT,
 } from "./consts/text.const";
 import FavoritePage from "./pages/favorite-page";
+import RecipeDetailPage from "./pages/recipe-detail-page";
 import RecipePage from "./pages/recipe-page";
 import SearchPage from "./pages/recipe-search-page";
 import "./styles.css";

@@ -32,6 +32,10 @@ vi.mock("@/components/error/error", () => ({
   default: vi.fn(() => <div>Error</div>),
 }));
 
+vi.mock("@/components/skeleton/recipe-search-skeleton", () => ({
+  default: vi.fn(() => <div>RecipeSearchSkeleton</div>),
+}));
+
 describe(SearchPage.name, () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -42,7 +46,21 @@ describe(SearchPage.name, () => {
       error: null,
     });
   });
-  
+
+  it("should show loading state", () => {
+    vi.mocked(useRecipeSearch).mockReturnValue({
+      recipes: [],
+      isLoading: true,
+      error: null,
+    });
+
+    render(<SearchPage />);
+
+    const loadingSkeleton = screen.getByText("RecipeSearchSkeleton");
+
+    expect(loadingSkeleton).toBeInTheDocument();
+  });
+
   it("should show the title", () => {
     render(<SearchPage />);
 

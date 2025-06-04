@@ -14,13 +14,14 @@ function RecipeSearchList({ recipes }: Readonly<RecipeSearchListProps>) {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {recipes.map(function mapRecipe(recipe) {
         return (
           <RecipeCarouselItem
             key={recipe.id}
             recipe={recipe}
             handleRecipeClick={handleRecipeClick}
+            useFullWidthImages
           />
         );
       })}

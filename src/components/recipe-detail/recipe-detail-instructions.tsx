@@ -1,5 +1,5 @@
 import { RECIPE_DETAIL_PAGE_INSTRUCTIONS_TITLE } from "@/consts/text.const";
-import Subtitle from "../../input/typography/subtitle";
+import Subtitle from "@/components/input/typography/subtitle";
 
 interface RecipeDetailInstructionsProps {
   recipeInstructions: string;

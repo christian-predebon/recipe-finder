@@ -2,14 +2,14 @@ import {
   RECIPE_PAGE_DESCRIPTION,
   RECIPE_PAGE_TITLE,
 } from "@/consts/text.const";
-import { useRecipesGrouped } from "@/hooks/use-recipes-grouped/use-recipes-grouped";
+import { useRecipeGrouped } from "@/hooks/use-recipe-grouped/use-recipe-grouped";
 import { IRecipeGroup } from "@/services/recipe/entities/recipe-group.entity";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import RecipePage from "./recipe-page";
 
-vi.mock("@/hooks/use-recipes-grouped/use-recipes-grouped", () => ({
-  useRecipesGrouped: vi.fn(),
+vi.mock("@/hooks/use-recipe-grouped/use-recipe-grouped", () => ({
+  useRecipeGrouped: vi.fn(),
 }));
 
 vi.mock("@/components/recipe/recipe-groups", () => ({
@@ -28,7 +28,7 @@ describe(RecipePage.name, () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    vi.mocked(useRecipesGrouped).mockReturnValue({
+    vi.mocked(useRecipeGrouped).mockReturnValue({
       groupedRecipes: [],
       isLoading: false,
       error: null,
@@ -52,7 +52,7 @@ describe(RecipePage.name, () => {
   });
 
   it("should show loading state", () => {
-    vi.mocked(useRecipesGrouped).mockReturnValue({
+    vi.mocked(useRecipeGrouped).mockReturnValue({
       groupedRecipes: [] as IRecipeGroup[],
       isLoading: true,
       error: null,
@@ -66,7 +66,7 @@ describe(RecipePage.name, () => {
   });
 
   it("should show the error", () => {
-    vi.mocked(useRecipesGrouped).mockReturnValue({
+    vi.mocked(useRecipeGrouped).mockReturnValue({
       groupedRecipes: [] as IRecipeGroup[],
       isLoading: false,
       error: new Error("Test error"),
@@ -80,7 +80,7 @@ describe(RecipePage.name, () => {
   });
 
   it("should render recipe groups when data is loaded", () => {
-    vi.mocked(useRecipesGrouped).mockReturnValue({
+    vi.mocked(useRecipeGrouped).mockReturnValue({
       groupedRecipes: [{ category: "Breakfast", recipes: [] }],
       isLoading: false,
       error: null,

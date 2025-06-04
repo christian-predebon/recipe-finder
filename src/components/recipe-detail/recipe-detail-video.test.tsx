@@ -1,12 +1,12 @@
 import { RECIPE_DETAIL_PAGE_VIDEO_TITLE } from "@/consts/text.const";
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { extractYouTubeVideoId } from "../utils/extract-youtube-video-id";
 import RecipeDetailVideo from "./recipe-detail-video";
+import { extractYouTubeVideoId } from "./utils/extract-youtube-video-id";
 
 const mockVideoId = "dQw4w9WgXcQ";
 
-vi.mock("../utils/extract-youtube-video-id", () => ({
+vi.mock("./utils/extract-youtube-video-id", () => ({
   extractYouTubeVideoId: vi.fn(),
 }));
 

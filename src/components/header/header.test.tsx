@@ -1,9 +1,5 @@
 import { ROUTES } from "@/consts/routes.const";
-import {
-  BOOKMARK_BUTTON_TEXT,
-  HEADER_TITLE,
-  SEARCH_BUTTON_TEXT,
-} from "@/consts/text.const";
+import { HEADER_TITLE } from "@/consts/text.const";
 import useHeaderMenuState from "@/hooks/use-header-menu-state/use-header-menu-state";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
@@ -20,28 +16,17 @@ vi.mock("@/hooks/use-header-menu-state/use-header-menu-state", () => ({
 }));
 
 vi.mock("@/components/header/components/header-actions", () => ({
-  default: vi.fn(() => (
-    <div>
-      <button onClick={mockOpenMenu}>{SEARCH_BUTTON_TEXT}</button>
-      <button onClick={() => navigateSpy(ROUTES.FAVORITES)}>
-        {BOOKMARK_BUTTON_TEXT}
-      </button>
-    </div>
-  )),
+  default: vi.fn(() => <div>HeaderActions</div>),
 }));
 
 vi.mock("@/components/header/components/header-menu-popup", () => ({
-  default: vi.fn(() => (
-    <div data-testid="header-menu-popup">
-      <button onClick={() => navigateSpy(ROUTES.FAVORITES)}>
-        {BOOKMARK_BUTTON_TEXT}
-      </button>
-    </div>
-  )),
+  default: vi.fn(() => <div>HeaderMenuPopup</div>),
 }));
 
 describe(Header.name, () => {
   beforeEach(() => {
+    vi.clearAllMocks();
+
     vi.mocked(useHeaderMenuState).mockReturnValue({
       isMenuOpen: false,
       menuRef: { current: null },
@@ -50,15 +35,11 @@ describe(Header.name, () => {
     });
   });
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it("renders correctly the title", () => {
     render(<Header />);
 
     const title = screen.getByText(HEADER_TITLE);
-    
+
     expect(title).toBeInTheDocument();
   });
 
@@ -69,23 +50,5 @@ describe(Header.name, () => {
     fireEvent.click(title);
 
     expect(navigateSpy).toHaveBeenCalledWith(ROUTES.HOME);
-  });
-
-  it("navigates to favorites page when clicking the favorite button", () => {
-    render(<Header />);
-
-    const favoriteButton = screen.getByText(BOOKMARK_BUTTON_TEXT);
-    fireEvent.click(favoriteButton);
-
-    expect(navigateSpy).toHaveBeenCalledWith(ROUTES.FAVORITES);
-  });
-
-  it("renders the menu button when the screen is small", () => {
-    render(<Header />);
-
-    const menuButton = screen.getByText(SEARCH_BUTTON_TEXT);
-    fireEvent.click(menuButton);
-
-    expect(mockOpenMenu).toHaveBeenCalled();
   });
 });

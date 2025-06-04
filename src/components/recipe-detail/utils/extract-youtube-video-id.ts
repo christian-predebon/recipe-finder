@@ -1,5 +1,5 @@
 export function extractYouTubeVideoId(url: string): string | null {
-  if (!url || typeof url !== "string") {
+  if (typeof url !== "string" || url.length === 0) {
     return null;
   }
 

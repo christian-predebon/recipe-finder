@@ -5,10 +5,10 @@ import {
   RECIPE_PAGE_DESCRIPTION,
   RECIPE_PAGE_TITLE,
 } from "@/consts/text.const";
-import { useRecipesGrouped } from "@/hooks/use-recipes-grouped/use-recipes-grouped";
+import { useRecipeGrouped } from "@/hooks/use-recipe-grouped/use-recipe-grouped";
 
 function RecipePage() {
-  const { groupedRecipes, isLoading, error } = useRecipesGrouped();
+  const { groupedRecipes, isLoading, error } = useRecipeGrouped();
 
   if (error) {
     return <ErrorComponent />;

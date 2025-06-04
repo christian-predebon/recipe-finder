@@ -8,7 +8,7 @@ async function fetcher(): Promise<IRecipeGroups> {
   return await recipeServiceInstance.getRecipesGroupedByCategory();
 }
 
-export function useRecipesGrouped() {
+export function useRecipeGrouped() {
   const { data, isLoading, error } = useSWR<IRecipeGroups>(
     USE_RECIPES_GROUPED_KEY,
     fetcher

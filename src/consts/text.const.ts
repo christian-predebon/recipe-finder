@@ -19,3 +19,5 @@ export const RECIPE_DETAIL_PAGE_VIDEO_TITLE = "Video Tutorial";
 export const RECIPE_SEARCH_PAGE_DESCRIPTION =
   "Trova le ricette che preferisci in base agli ingredienti o al nome";
 export const RECIPE_SEARCH_PAGE_NO_RESULTS = "Nessuna ricetta trovata";
+export const RECIPE_SEARCH_INGREDIENT_BUTTON_TEXT = "Per ingrediente";
+export const RECIPE_SEARCH_NAME_BUTTON_TEXT = "Per nome";

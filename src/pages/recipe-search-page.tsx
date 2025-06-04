@@ -2,6 +2,7 @@ import ErrorComponent from "@/components/error/error";
 import Subtitle from "@/components/input/typography/subtitle";
 import RecipeSearch from "@/components/recipe-search/recipe-search";
 import RecipeSearchList from "@/components/recipe/recipe-search-list/recipe-search-list";
+import RecipeSearchSkeleton from "@/components/skeleton/recipe-search-skeleton";
 import {
   RECIPE_SEARCH_PAGE_DESCRIPTION,
   RECIPE_SEARCH_PAGE_NO_RESULTS,
@@ -44,11 +45,7 @@ function SearchPage() {
         />
       </div>
 
-      {isLoading && (
-        <div className="flex justify-center py-8">
-          <div className="w-6 h-6 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      )}
+      {isLoading && <RecipeSearchSkeleton />}
 
       {error && <ErrorComponent />}
 

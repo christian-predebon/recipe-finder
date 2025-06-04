@@ -4,20 +4,27 @@ import { IRecipeSearch } from "@/services/recipe/entities/recipe-search.entity";
 interface RecipeCarouselItemProps {
   recipe: IRecipeSearch;
   handleRecipeClick: (recipeId: string) => void;
+  useFullWidthImages?: boolean;
 }
 
 function RecipeCarouselItem({
   recipe,
   handleRecipeClick,
+  useFullWidthImages = false,
 }: Readonly<RecipeCarouselItemProps>) {
   const isSmallScreen = useIsSmallScreen();
 
-  const boxWidth = isSmallScreen ? "w-full" : "w-72";
+  const getWidthClass = () => {
+    if (useFullWidthImages) return "w-full";
+    if (isSmallScreen) return "w-full";
+
+    return "w-72";
+  };
 
   return (
     <div
       onClick={() => handleRecipeClick(recipe.id)}
-      className={`flex-none snap-start cursor-pointer ${boxWidth}`}
+      className={`flex-none snap-start cursor-pointer ${getWidthClass()}`}
     >
       <div className="rounded-xl overflow-hidden">
         <div className="relative aspect-[4/3] rounded-xl">
