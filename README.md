@@ -1,4 +1,9 @@
+<center>
 # Recipe Finder
+
+![Recipe Book](./src/assets/recipe-book.png)
+
+</center>
 
 ### How to setup
 
