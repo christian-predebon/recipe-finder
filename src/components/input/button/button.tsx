@@ -14,7 +14,7 @@ function Button({
   variant = "outlined",
 }: Readonly<ButtonProps>) {
   const baseClassName =
-    "flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-1 cursor-pointer";
+    "group flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-1 cursor-pointer min-w-fit";
 
   const variantStyles = {
     outlined:

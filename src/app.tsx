@@ -7,8 +7,8 @@ import {
   RECIPE_DETAIL_PAGE_TITLE,
   SEARCH_BUTTON_TEXT,
 } from "./consts/text.const";
-import FavoritePage from "./pages/favorite-page";
 import RecipeDetailPage from "./pages/recipe-detail-page";
+import FavoritePage from "./pages/recipe-favorite-page";
 import RecipePage from "./pages/recipe-page";
 import SearchPage from "./pages/recipe-search-page";
 import "./styles.css";

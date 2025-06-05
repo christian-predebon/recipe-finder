@@ -1,7 +1,7 @@
 import { useRecipeCarousel } from "@/hooks/use-recipe-carousel/use-recipe-carousel";
 import { IRecipeSearch } from "@/services/recipe/entities/recipe-search.entity";
 import { useNavigate } from "react-router-dom";
-import Subtitle from "../../input/typography/subtitle";
+import Typography from "../../input/typography/typography";
 import RecipeCarouselItem from "./components/recipe-carousel-item";
 import RecipeCarouselNavigation from "./components/recipe-carousel-navigation";
 
@@ -26,7 +26,7 @@ function RecipeCarousel({
   return (
     <div className="relative">
       <div className="flex items-center justify-between mb-2">
-        <Subtitle>{categoryName}</Subtitle>
+        <Typography variant="subtitle">{categoryName}</Typography>
         <RecipeCarouselNavigation
           showLeftArrow={showLeftArrow}
           showRightArrow={showRightArrow}

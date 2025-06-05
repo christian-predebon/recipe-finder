@@ -21,3 +21,8 @@ export const RECIPE_SEARCH_PAGE_DESCRIPTION =
 export const RECIPE_SEARCH_PAGE_NO_RESULTS = "Nessuna ricetta trovata";
 export const RECIPE_SEARCH_INGREDIENT_BUTTON_TEXT = "Per ingrediente";
 export const RECIPE_SEARCH_NAME_BUTTON_TEXT = "Per nome";
+
+// favorite page
+export const FAVORITE_PAGE_TITLE = "Le tue ricette preferite";
+export const FAVORITE_PAGE_DESCRIPTION =
+  "Salva le tue ricette preferite per averle sempre a portata di mano";

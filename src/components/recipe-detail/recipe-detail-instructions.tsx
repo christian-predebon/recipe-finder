@@ -1,5 +1,5 @@
+import Typography from "@/components/input/typography/typography";
 import { RECIPE_DETAIL_PAGE_INSTRUCTIONS_TITLE } from "@/consts/text.const";
-import Subtitle from "@/components/input/typography/subtitle";
 
 interface RecipeDetailInstructionsProps {
   recipeInstructions: string;
@@ -10,11 +10,16 @@ function RecipeDetailInstructions({
 }: RecipeDetailInstructionsProps) {
   return (
     <div className="space-y-4">
-      <Subtitle>{RECIPE_DETAIL_PAGE_INSTRUCTIONS_TITLE}</Subtitle>
+      <Typography variant="subtitle">
+        {RECIPE_DETAIL_PAGE_INSTRUCTIONS_TITLE}
+      </Typography>
 
-      <p className="text-sm text-gray-600 whitespace-pre-line leading-relaxed">
+      <Typography
+        variant="body"
+        className="whitespace-pre-line leading-relaxed"
+      >
         {recipeInstructions}
-      </p>
+      </Typography>
     </div>
   );
 }

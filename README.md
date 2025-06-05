@@ -1,6 +1,6 @@
 ### Recipe Finder
 
-### How to setup
+### How to run the project
 
 1. Clone the repository
 2. Run `nvm use`
@@ -43,4 +43,7 @@ The project uses the free [Themealdb API](https://www.themealdb.com/api.php) to 
 
 ### Next steps
 
-- Let's add a way to save the recipes to a local list
+- Improve the Favorite flow, allow users to create lists with names to organize recipes
+- Split the components into smaller components (e.g.: recipe-favorite-page)
+- Keep horizontal scroll position (in carousel) when navigating between pages
+- Disable the scroll icon buttons when there is no scrollable content

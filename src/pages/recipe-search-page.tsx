@@ -1,5 +1,5 @@
 import ErrorComponent from "@/components/error/error";
-import Subtitle from "@/components/input/typography/subtitle";
+import Typography from "@/components/input/typography/typography";
 import RecipeSearch from "@/components/recipe-search/recipe-search";
 import RecipeSearchList from "@/components/recipe/recipe-search-list/recipe-search-list";
 import RecipeSearchSkeleton from "@/components/skeleton/recipe-search-skeleton";
@@ -28,11 +28,15 @@ function SearchPage() {
     searchType
   );
 
+  const hasSearchResults = !isLoading && !error && recipes.length > 0;
+  const hasNoResults =
+    !isLoading && !error && recipes.length === 0 && searchQuery;
+
   return (
     <div className="max-w-7xl mx-auto py-24">
       <div className="mb-8">
-        <Subtitle>{SEARCH_BUTTON_TEXT}</Subtitle>
-        <p className="text-gray-600 mt-2">{RECIPE_SEARCH_PAGE_DESCRIPTION}</p>
+        <Typography variant="subtitle">{SEARCH_BUTTON_TEXT}</Typography>
+        <Typography variant="body">{RECIPE_SEARCH_PAGE_DESCRIPTION}</Typography>
       </div>
 
       <div className="mb-8">
@@ -48,11 +52,9 @@ function SearchPage() {
 
       {error && <ErrorComponent />}
 
-      {!isLoading && !error && recipes.length > 0 && (
-        <RecipeSearchList recipes={recipes} />
-      )}
+      {hasSearchResults && <RecipeSearchList recipes={recipes} />}
 
-      {!isLoading && !error && recipes.length === 0 && searchQuery && (
+      {hasNoResults && (
         <div className="text-center py-4">
           <p className="text-gray-500">{RECIPE_SEARCH_PAGE_NO_RESULTS}</p>
         </div>

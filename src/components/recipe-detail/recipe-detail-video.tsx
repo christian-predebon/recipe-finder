@@ -1,4 +1,4 @@
-import Subtitle from "@/components/input/typography/subtitle";
+import Typography from "@/components/input/typography/typography";
 import { RECIPE_DETAIL_PAGE_VIDEO_TITLE } from "@/consts/text.const";
 import { extractYouTubeVideoId } from "./utils/extract-youtube-video-id";
 
@@ -11,7 +11,7 @@ function RecipeDetailVideo({ youtubeId }: RecipeDetailVideoProps) {
 
   return (
     <div className="space-y-4">
-      <Subtitle>{RECIPE_DETAIL_PAGE_VIDEO_TITLE}</Subtitle>
+      <Typography variant="subtitle">{RECIPE_DETAIL_PAGE_VIDEO_TITLE}</Typography>
 
       <div className="aspect-video w-full rounded-lg overflow-hidden">
         <iframe
