@@ -15,8 +15,10 @@ import { useParams } from "react-router-dom";
 function RecipeDetailPage() {
   const { id } = useParams();
   const { recipe, isLoading, error } = useRecipeById(id);
+
   const { recipeSaved, addRecipeToSaved, removeRecipeFromSaved } =
     useRecipeSaved();
+
   const isSmallScreen = useIsSmallScreen();
 
   useEffect(() => {
@@ -39,7 +41,7 @@ function RecipeDetailPage() {
     (savedRecipe) => savedRecipe.id === recipe.id
   );
 
-  const handleSaveClick = () => {
+  const handleSaveToFavoritesClick = () => {
     if (isRecipeSaved) {
       removeRecipeFromSaved(recipe);
     } else {
@@ -58,7 +60,7 @@ function RecipeDetailPage() {
           />
           {isSmallScreen && (
             <button
-              onClick={handleSaveClick}
+              onClick={handleSaveToFavoritesClick}
               className="absolute top-4 right-4 p-3 rounded-full bg-white/80 hover:bg-white transition-colors"
             >
               <Heart
@@ -75,7 +77,7 @@ function RecipeDetailPage() {
             <Typography variant="subtitle">{recipe.name}</Typography>
             {!isSmallScreen && (
               <Button
-                onClick={handleSaveClick}
+                onClick={handleSaveToFavoritesClick}
                 icon={
                   <Heart
                     className={`h-3.5 w-3.5 ${

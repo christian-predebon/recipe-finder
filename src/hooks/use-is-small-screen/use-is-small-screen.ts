@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
-const BREAKPOINT = 768;
+const BREAKPOINT_WIDTH = 768;
 
 function useIsSmallScreen() {
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(
-    () => window.innerWidth < BREAKPOINT
+    () => window.innerWidth < BREAKPOINT_WIDTH
   );
 
-  useEffect(() => {
+  useEffect(function updateScreenSize() {
     const updateScreenSize = () => {
-      setIsSmallScreen(window.innerWidth < BREAKPOINT);
+      setIsSmallScreen(window.innerWidth < BREAKPOINT_WIDTH);
     };
 
     updateScreenSize();

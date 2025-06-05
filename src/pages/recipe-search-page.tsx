@@ -30,7 +30,7 @@ function SearchPage() {
 
   const hasSearchResults = !isLoading && !error && recipes.length > 0;
   const hasNoResults =
-    !isLoading && !error && recipes.length === 0 && searchQuery;
+    !isLoading && !error && recipes.length === 0 && searchQuery !== "";
 
   return (
     <div className="max-w-7xl mx-auto py-24">

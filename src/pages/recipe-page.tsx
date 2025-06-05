@@ -10,12 +10,12 @@ import { useRecipeGrouped } from "@/hooks/use-recipe-grouped/use-recipe-grouped"
 function RecipePage() {
   const { groupedRecipes, isLoading, error } = useRecipeGrouped();
 
-  if (error) {
-    return <ErrorComponent />;
-  }
-
   if (isLoading) {
     return <RecipePageSkeleton />;
+  }
+
+  if (error) {
+    return <ErrorComponent />;
   }
 
   return (
